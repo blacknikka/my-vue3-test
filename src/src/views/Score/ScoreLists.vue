@@ -2,8 +2,8 @@
   <div>test</div>
   <ScoreDisplayItem
     v-for="(score, key) in scores"
-    :score="score"
     :key="key"
+    :score="score"
   />
 </template>
 

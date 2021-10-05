@@ -1,5 +1,5 @@
 <template>
-  <div>score is : {{score}}</div>
+  <div>score is : {{ score }}</div>
 </template>
 
 <script>

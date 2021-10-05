@@ -1,5 +1,5 @@
 <template>
-  <div>test</div>
+  <div>average: {{ averagedScore }}</div>
   <ScoreDisplayItem
     v-for="(score, key) in scores"
     :key="key"
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { fetchAllScore } from "@/Utils/api/ScoreApi";
 import ScoreDisplayItem from "./ScoreDisplayItem";
 
@@ -30,8 +30,16 @@ export default {
 
     onMounted(fetchScores);
 
+    // compute averaged score
+    const averagedScore = computed(() => {
+      if (scores.value.length === 0) return 0;
+      const sum = scores.value.reduce((p, c) => p + c, 0);
+      return (sum / scores.value.length) || 0;
+    });
+
     return {
       scores,
+      averagedScore,
     };
   },
 };

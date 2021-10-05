@@ -1,9 +1,11 @@
 <template>
   <div class="home">
-  <img alt="Vue logo" src="@/assets/logo.png">
-  <ScoreLists></ScoreLists>>
-  
-    </div>
+    <img
+      alt="Vue logo"
+      src="@/assets/logo.png"
+    >
+    <ScoreLists />>
+  </div>
 </template>
 
 <script lang="ts">

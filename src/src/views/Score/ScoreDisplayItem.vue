@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { onMounted } from 'vue';
 
 export default {
   props: {
@@ -19,4 +19,3 @@ export default {
   },
 };
 </script>
-

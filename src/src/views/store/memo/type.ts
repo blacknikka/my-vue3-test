@@ -1,6 +1,6 @@
-import { DeepReadonly } from "vue";
+import { DeepReadonly } from 'vue';
 
-export type status = "doing" | "done" | "pending";
+export type status = 'doing' | 'done' | 'pending';
 
 export interface Memo {
   id: number;
@@ -15,7 +15,7 @@ export interface MemoState {
   memos: Memo[];
 }
 
-export type Params = Pick<Memo, "title" | "body" | "status">;
+export type Params = Pick<Memo, 'title' | 'body' | 'status'>;
 
 export interface MemoStore {
   state: DeepReadonly<MemoState>;

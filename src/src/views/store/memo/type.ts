@@ -19,7 +19,7 @@ export type Params = Pick<Memo, 'title' | 'body' | 'status'>;
 
 export interface MemoStore {
   state: DeepReadonly<MemoState>;
-  getMemo: (id: number) => void;
+  getMemo: (id: number) => Memo;
   addMemo: (memo: Params) => void;
   updateMemo: (id: number, memo: Memo) => void;
   deleteMemo: (id: number) => void;

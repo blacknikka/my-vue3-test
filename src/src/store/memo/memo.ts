@@ -59,7 +59,7 @@ const addMemo = (memo: Params) => {
 const updateMemo = (id: number, memo: Memo) => {
   const index = state.memos.findIndex((memo) => memo.id === id);
   if (index === -1) {
-    throw new Error(`[update] cannot memo, id: ${id}`);
+    throw new Error(`[update] cannot find memo, id: ${id}`);
   }
   state.memos[index] = memo;
 };
@@ -67,7 +67,7 @@ const updateMemo = (id: number, memo: Memo) => {
 const deleteMemo = (id: number) => {
   const index = state.memos.findIndex((memo) => memo.id === id);
   if (index === -1) {
-    throw new Error(`[delete] cannot memo, id: ${id}`);
+    throw new Error(`[delete] cannot find memo, id: ${id}`);
   }
   state.memos.splice(index, 1);
 };

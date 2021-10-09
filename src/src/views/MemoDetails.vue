@@ -3,7 +3,8 @@
   <div>{{ memo.body }}</div>
   <div>{{ memo.status }}</div>
 
-  <button @click="onClick">go back</button>
+  <button @click="onGoBackClick">go back</button>
+  <button @click="onDeleteClick">delete</button>
 </template>
 
 <script lang="ts">
@@ -22,17 +23,25 @@ export default defineComponent({
     const router = useRouter();
 
     if (!('id' in route.params)) {
-      throw new Error('id is invalid.');
+      throw new Error(`id is invalid. route.params => ${route.params}`);
     }
-    const memo = memoStore.getMemo(Number(route.params.id));
+    const id = Number(route.params.id);
 
-    const onClick = () => {
+    const memo = memoStore.getMemo(id);
+
+    const onGoBackClick = () => {
+      router.back();
+    };
+
+    const onDeleteClick = () => {
+      memoStore.deleteMemo(id);
       router.back();
     };
 
     return {
       memo,
-      onClick,
+      onGoBackClick,
+      onDeleteClick,
     };
   },
 });

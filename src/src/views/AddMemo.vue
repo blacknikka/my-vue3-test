@@ -25,7 +25,7 @@
 import { defineComponent, inject, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { memoKey } from '@/store/memo/memo';
-import { Params } from '@/store/memo/types';
+import { Params } from '@/store/memo/type';
 
 export default defineComponent({
   setup() {

@@ -1,7 +1,7 @@
 <template>
   <h2>memos</h2>
   <ul>
-    <li v-for="memo in memoStore.state.memos" :key="memo.id">
+    <li v-for="memo in memoStore.state.memos" :key="memo.id" @click="onClick(memo.id)">
       {{ memo.title }}
     </li>
   </ul>
@@ -11,6 +11,7 @@
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
 import { memoKey } from '@/store/memo/memo';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
@@ -19,8 +20,20 @@ export default defineComponent({
       throw new Error('memo store is not provided');
     }
 
+    const router = useRouter();
+
+    const onClick = (id: string): void => {
+      router.push({
+        name: 'MemoDetails',
+        params: {
+          id,
+        },
+      });
+    };
+
     return {
       memoStore,
+      onClick,
     };
   },
 });

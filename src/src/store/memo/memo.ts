@@ -32,7 +32,7 @@ const state = reactive<MemoState>({
   memos: mockMemo,
 });
 
-const initializeMemo = (memo: Params) => {
+const initializeMemo = (memo: Params): Memo => {
   const date = new Date();
   return {
     id: date.getTime(),
@@ -44,12 +44,12 @@ const initializeMemo = (memo: Params) => {
   } as Memo;
 };
 
-const getMemo = (id: number) => {
-  const memo = state.memos.find((memo) => memo.id === id);
-  if (!memo) {
+const getMemo = (id: number): Memo => {
+  const found = state.memos.find((memo) => memo.id === id);
+  if (!found) {
     throw new Error(`cannot find memo, id: ${id}`);
   }
-  return memo;
+  return found;
 };
 
 const addMemo = (memo: Params) => {

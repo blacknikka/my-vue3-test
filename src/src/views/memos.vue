@@ -5,6 +5,7 @@
       {{ memo.title }}
     </li>
   </ul>
+  <router-link to="/add">Add</router-link>
 </template>
 
 <script lang="ts">

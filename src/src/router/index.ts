@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 import Home from '@/views/Home.vue';
 import Memos from '@/views/memos.vue';
+import AddMemo from '@/views/AddMemo.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/memo',
     name: 'Memos',
     component: Memos,
+  },
+  {
+    path: '/add',
+    name: 'AddMemo',
+    component: AddMemo,
   },
 ];
 

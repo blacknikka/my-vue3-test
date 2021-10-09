@@ -17,5 +17,6 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'vue/no-multiple-template-root': 'off',
+    'vue/valid-v-on': 'off',
   }
 }

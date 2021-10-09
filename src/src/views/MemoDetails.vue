@@ -1,19 +1,34 @@
 <template>
-  <h1>{{ memo.title }}</h1>
-  <div>{{ memo.body }}</div>
-  <div>{{ memo.status }}</div>
+  <body>
+    <h1>{{ memo.title }}</h1>
+    <div>{{ memo.body }}</div>
+    <div>{{ memo.status }}</div>
 
-  <button @click="onGoBackClick">go back</button>
-  <button @click="onDeleteClick">delete</button>
+    <button @click="onGoBackClick">go back</button>
+    <button @click="onDeleteClick">delete</button>
+    <yes-or-no
+      title="確認"
+      question="削除しますか"
+      :modal="YorN"
+      @eventClickClose="eventClickClose"
+      @eventClickYes="eventClickYes"
+      @eventClickNo="eventClickNo"
+    ></yes-or-no>
+  </body>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { memoKey } from '@/store/memo/memo';
+import YesOrNo from '@/views/navigate/YesOrNo.vue';
 
 export default defineComponent({
+  components: {
+    YesOrNo,
+  },
   setup() {
+    let YorN = ref(false);
     const memoStore = inject(memoKey);
     if (!memoStore) {
       throw new Error('memo store is not provided');
@@ -34,6 +49,19 @@ export default defineComponent({
     };
 
     const onDeleteClick = () => {
+      YorN.value = true;
+    };
+
+    const onEventClickClose = () => {
+      YorN.value = false;
+    };
+
+    const onEventClickNo = () => {
+      YorN.value = false;
+    };
+
+    const onEventClickYes = () => {
+      YorN.value = false;
       memoStore.deleteMemo(id);
       router.back();
     };
@@ -42,6 +70,10 @@ export default defineComponent({
       memo,
       onGoBackClick,
       onDeleteClick,
+      YorN,
+      eventClickYes: onEventClickYes,
+      eventClickNo: onEventClickNo,
+      eventClickClose: onEventClickClose,
     };
   },
 });

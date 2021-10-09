@@ -2,6 +2,18 @@
   <router-view />
 </template>
 
+<script lang="ts">
+import { defineComponent, provide } from 'vue';
+import memoStore, { memoKey } from '@/store/memo/memo';
+
+export default defineComponent({
+  name: 'App',
+  setup() {
+    provide(memoKey, memoStore);
+  },
+});
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

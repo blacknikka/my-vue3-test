@@ -1,18 +1,13 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
-import Home from '@/views/Home.vue';
 import Memos from '@/views/memos.vue';
 import AddMemo from '@/views/AddMemo.vue';
 import MemoDetails from '@/views/MemoDetails.vue';
+import EditMemo from '@/views/EditMemo.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/memo',
     name: 'Memos',
     component: Memos,
   },
@@ -25,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/memo/:id',
     name: 'MemoDetails',
     component: MemoDetails,
+  },
+  {
+    path: '/memo/:id/edit',
+    name: 'EditMemo',
+    component: EditMemo,
   },
 ];
 

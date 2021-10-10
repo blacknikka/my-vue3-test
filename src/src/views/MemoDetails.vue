@@ -5,6 +5,7 @@
     <div>{{ memo.status }}</div>
 
     <button @click="onGoBackClick">go back</button>
+    <button @click="onEditClick">edit</button>
     <button @click="onDeleteClick">delete</button>
     <yes-or-no
       title="確認"
@@ -44,12 +45,24 @@ export default defineComponent({
 
     const memo = memoStore.getMemo(id);
 
+    // go back
     const onGoBackClick = () => {
       router.back();
     };
 
+    // delete
     const onDeleteClick = () => {
       YorN.value = true;
+    };
+
+    // edit
+    const onEditClick = () => {
+      router.push({
+        name: 'EditMemo',
+        params: {
+          id,
+        },
+      })
     };
 
     const onEventClickClose = () => {
@@ -70,6 +83,7 @@ export default defineComponent({
       memo,
       onGoBackClick,
       onDeleteClick,
+      onEditClick,
       YorN,
       eventClickYes: onEventClickYes,
       eventClickNo: onEventClickNo,

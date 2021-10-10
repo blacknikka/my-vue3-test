@@ -62,7 +62,7 @@ export default defineComponent({
         params: {
           id,
         },
-      })
+      });
     };
 
     const onEventClickClose = () => {

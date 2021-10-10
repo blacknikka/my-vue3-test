@@ -62,7 +62,7 @@ const updateMemo = (id: number, memo: Memo) => {
     throw new Error(`[update] cannot find memo, id: ${id}`);
   }
 
-  state.memos[index].id = id
+  state.memos[index].id = id;
   state.memos[index].title = memo.title;
   state.memos[index].body = memo.body;
   state.memos[index].status = memo.status;

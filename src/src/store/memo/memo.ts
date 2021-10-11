@@ -1,47 +1,15 @@
 import { reactive, readonly, InjectionKey } from 'vue';
 import { Memo, MemoState, MemoStore, Params } from './type';
-
-const mockMemo: Memo[] = [
-  {
-    id: 1,
-    title: 'title1',
-    body: '1st',
-    status: 'doing',
-    createdAt: new Date('2021-10-08'),
-    updatedAt: new Date('2021-10-08'),
-  },
-  {
-    id: 2,
-    title: 'title2',
-    body: '2nd',
-    status: 'done',
-    createdAt: new Date('2021-10-09'),
-    updatedAt: new Date('2021-10-09'),
-  },
-  {
-    id: 3,
-    title: 'title3',
-    body: '3rd',
-    status: 'done',
-    createdAt: new Date('2021-10-10'),
-    updatedAt: new Date('2021-10-10'),
-  },
-];
+import Repository from '@/repositories/repositoryFactory';
 
 const state = reactive<MemoState>({
-  memos: mockMemo,
+  memos: [],
 });
 
-const initializeMemo = (memo: Params): Memo => {
-  const date = new Date();
-  return {
-    id: date.getTime(),
-    title: memo.title,
-    body: memo.body,
-    status: memo.status,
-    createdAt: date,
-    updatedAt: date,
-  } as Memo;
+const fetchAll = async (): Promise<Memo[]> => {
+  const memos = await Repository.memo().getAll();
+  state.memos = memos;
+  return memos;
 };
 
 const getMemo = (id: number): Memo => {
@@ -52,33 +20,21 @@ const getMemo = (id: number): Memo => {
   return found;
 };
 
-const addMemo = (memo: Params) => {
-  state.memos.push(initializeMemo(memo));
+const addMemo = async (memo: Params) => {
+  await Repository.memo().create(memo);
 };
 
-const updateMemo = (id: number, memo: Memo) => {
-  const index = state.memos.findIndex((memo) => memo.id === id);
-  if (index === -1) {
-    throw new Error(`[update] cannot find memo, id: ${id}`);
-  }
-
-  state.memos[index].id = id;
-  state.memos[index].title = memo.title;
-  state.memos[index].body = memo.body;
-  state.memos[index].status = memo.status;
-  state.memos[index].updatedAt = new Date();
+const updateMemo = async (id: number, memo: Params) => {
+  await Repository.memo().update(id, memo);
 };
 
-const deleteMemo = (id: number) => {
-  const index = state.memos.findIndex((memo) => memo.id === id);
-  if (index === -1) {
-    throw new Error(`[delete] cannot find memo, id: ${id}`);
-  }
-  state.memos.splice(index, 1);
+const deleteMemo = async (id: number) => {
+  await Repository.memo().delete(id);
 };
 
 const memoStore: MemoStore = {
   state: readonly(state),
+  fetchAll,
   getMemo,
   addMemo,
   updateMemo,

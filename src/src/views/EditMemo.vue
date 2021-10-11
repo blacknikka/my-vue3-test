@@ -28,10 +28,10 @@
 import { defineComponent, inject, reactive } from 'vue';
 import { memoKey } from '@/store/memo/memo';
 import { useRoute, useRouter } from 'vue-router';
-import { Params } from '@/store/memo/type';
+import { Params, Memo } from '@/store/memo/type';
 
 export default defineComponent({
-  setup() {
+  async setup() {
     const memoStore = inject(memoKey);
     if (!memoStore) {
       throw new Error('memo store is not provided');
@@ -46,7 +46,7 @@ export default defineComponent({
     const id = Number(route.params.id);
 
     // get id from store.
-    const targetMemo = memoStore.getMemo(id);
+    const targetMemo: Memo = await memoStore.getMemo(id);
 
     let data = reactive<Params>({
       title: targetMemo.title,

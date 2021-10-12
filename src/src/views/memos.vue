@@ -1,41 +1,33 @@
 <template>
   <h2>memos</h2>
-  <ul>
-    <li v-for="memo in memoStore.state.memos" :key="memo.id" @click="onClick(memo.id)">
-      {{ memo.title }}
-    </li>
-  </ul>
+  <div v-if="isLoading">now loading...</div>
+  <div v-show="!isLoading">
+    <Suspense>
+      <async-memos-index @onLoadComplete="onLoadComplete"></async-memos-index>
+    </Suspense>
+  </div>
   <router-link to="/add">Add</router-link>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
-import { memoKey } from '@/store/memo/memo';
-import { useRouter } from 'vue-router';
+import { defineComponent, ref } from 'vue';
+import AsyncMemosIndex from './AsyncMemosIndex.vue';
 
 export default defineComponent({
+  components: {
+    AsyncMemosIndex,
+  },
   setup() {
-    const memoStore = inject(memoKey);
-    if (!memoStore) {
-      throw new Error('memo store is not provided');
-    }
+    // start loading
+    let isLoading = ref(true);
 
-    memoStore.fetchAll();
-
-    const router = useRouter();
-
-    const onClick = (id: string): void => {
-      router.push({
-        name: 'MemoDetails',
-        params: {
-          id,
-        },
-      });
+    const onLoadComplete = () => {
+      isLoading.value = false;
     };
 
     return {
-      memoStore,
-      onClick,
+      isLoading,
+      onLoadComplete,
     };
   },
 });

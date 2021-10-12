@@ -42,6 +42,7 @@ export class MemoRepository implements MemoRepositoryInterface {
   }
 
   async getAll(): Promise<Memo[]> {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return await Promise.resolve(mockMemo);
   }
   async get(id: number): Promise<Memo> {

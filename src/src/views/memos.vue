@@ -20,6 +20,8 @@ export default defineComponent({
       throw new Error('memo store is not provided');
     }
 
+    memoStore.fetchAll();
+
     const router = useRouter();
 
     const onClick = (id: string): void => {

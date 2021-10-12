@@ -31,7 +31,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { Params, Memo } from '@/store/memo/type';
 
 export default defineComponent({
-  async setup() {
+  setup() {
     const memoStore = inject(memoKey);
     if (!memoStore) {
       throw new Error('memo store is not provided');
@@ -46,7 +46,7 @@ export default defineComponent({
     const id = Number(route.params.id);
 
     // get id from store.
-    const targetMemo: Memo = await memoStore.getMemo(id);
+    const targetMemo: Memo = memoStore.getMemo(id);
 
     let data = reactive<Params>({
       title: targetMemo.title,

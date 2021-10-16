@@ -1,5 +1,5 @@
 import { MemoRepositoryInterface } from '@/repositories/memoRepository/types';
-import { MemoRepository } from '@/repositories/memoRepository';
+import { MemoRepository } from '@/repositories/memoRepository/local';
 
 export class Repositories {
   private memoRepository: MemoRepositoryInterface;

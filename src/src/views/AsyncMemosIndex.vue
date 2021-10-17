@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { memoKey } from '@/store/memo/memo';
 import { useRouter } from 'vue-router';
 

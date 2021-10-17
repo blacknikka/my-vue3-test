@@ -1,24 +1,28 @@
 {
-    "posts": [
-        {
-            "id": 1,
-            "body": "foo"
-        },
-        {
-            "id": 2,
-            "body": "bar"
-        }
-    ],
-    "comments": [
-        {
-            "id": 1,
-            "body": "baz",
-            "postId": 1
-        },
-        {
-            "id": 2,
-            "body": "qux",
-            "postId": 2
-        }
-    ]
+  "memos": [
+    {
+      "id": 1,
+      "title": "title1",
+      "body": "1st.",
+      "status": "doing",
+      "createdAt": "2021-10-17",
+      "updatedAt": "2021-10-17"
+    },
+    {
+      "id": 2,
+      "title": "title2",
+      "body": "2nd",
+      "status": "done",
+      "createdAt": "2021-10-18",
+      "updatedAt": "2021-10-18"
+    },
+    {
+      "id": 3,
+      "title": "title3",
+      "body": "3rd",
+      "status": "done",
+      "createdAt": "2021-10-19",
+      "updatedAt": "2021-10-19"
+    }
+  ]
 }

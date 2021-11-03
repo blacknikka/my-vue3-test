@@ -2,7 +2,7 @@ import { MemoRepositoryInterface } from './types';
 import { Memo, Params } from '@/store/memo/type';
 
 export class MemoRepository implements MemoRepositoryInterface {
-  private readonly ENDPOINT = 'http://localhost:3000';
+  private readonly ENDPOINT = 'http://localhost/api';
 
   private makeUrl(path: string): string {
     return `${this.ENDPOINT}${path}`;

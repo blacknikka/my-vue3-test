@@ -60,6 +60,12 @@ export class MemoRepository implements MemoRepositoryInterface {
       throw new Error(`APi error: ${err}`);
     }
   }
+
+  /**
+   * Memo作成
+   * @param params
+   * @returns Memo
+   */
   async create(params: Params): Promise<Memo> {
     const memo = this.initializeMemo(params);
     const response = await fetch(this.makeUrl(`/memos/`), {
@@ -77,6 +83,13 @@ export class MemoRepository implements MemoRepositoryInterface {
       throw new Error(`APi error: ${err}`);
     }
   }
+
+  /**
+   * Memo更新
+   * @param id ID
+   * @param memo 更新内容
+   * @returns 更新後Memo
+   */
   async update(id: number, memo: Params): Promise<Memo> {
     const updatedMemo = await this.get(id);
     updatedMemo.id = id;
@@ -100,6 +113,12 @@ export class MemoRepository implements MemoRepositoryInterface {
       throw new Error(`APi error: ${err}`);
     }
   }
+
+  /**
+   * Memo削除
+   * @param id ID
+   * @returns void
+   */
   async delete(id: number): Promise<void> {
     const response = await fetch(this.makeUrl(`/memos/${id}`), {
       method: 'DELETE',

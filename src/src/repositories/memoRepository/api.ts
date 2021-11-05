@@ -20,6 +20,10 @@ export class MemoRepository implements MemoRepositoryInterface {
     } as Memo;
   }
 
+  /**
+   * 全Memoデータ取得
+   * @returns Promise<Memo[]>
+   */
   async getAll(): Promise<Memo[]> {
     const response = await fetch(this.makeUrl('/memos'), {
       headers: {
@@ -36,6 +40,11 @@ export class MemoRepository implements MemoRepositoryInterface {
     }
   }
 
+  /**
+   * Memo取得
+   * @param id ID
+   * @returns Memo
+   */
   async get(id: number): Promise<Memo> {
     const response = await fetch(this.makeUrl(`/memos/${id}`), {
       headers: {

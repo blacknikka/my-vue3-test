@@ -1,4 +1,4 @@
-import { reactive, readonly, InjectionKey } from 'vue';
+import { reactive, InjectionKey } from 'vue';
 import { User, UserState, UserStore } from './types';
 import Repository from '@/repositories/repositoryFactory';
 

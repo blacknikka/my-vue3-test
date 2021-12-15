@@ -5,11 +5,13 @@
 <script lang="ts">
 import { defineComponent, provide } from 'vue';
 import memoStore, { memoKey } from '@/store/memo/memo';
+import userStore, { userKey } from '@/store/user/user';
 
 export default defineComponent({
   name: 'App',
   setup() {
     provide(memoKey, memoStore);
+    provide(userKey, userStore);
   },
 });
 </script>

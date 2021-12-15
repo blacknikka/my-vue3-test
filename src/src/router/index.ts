@@ -4,6 +4,8 @@ import Memos from '@/views/memos.vue';
 import AddMemo from '@/views/AddMemo.vue';
 import MemoDetails from '@/views/MemoDetails.vue';
 import EditMemo from '@/views/EditMemo.vue';
+import MyPage from '@/views/User/MyPage.vue';
+import Login from '@/views/Login/Login.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +27,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/memo/:id/edit',
     name: 'EditMemo',
     component: EditMemo,
+  },
+  {
+    path: '/mypage',
+    name: 'MyPage',
+    component: MyPage,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
 ];
 

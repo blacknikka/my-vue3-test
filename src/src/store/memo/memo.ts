@@ -43,4 +43,4 @@ const memoStore: MemoStore = {
 
 export default memoStore;
 
-export const memoKey: InjectionKey<MemoStore> = Symbol('todo');
+export const memoKey: InjectionKey<MemoStore> = Symbol('memo');

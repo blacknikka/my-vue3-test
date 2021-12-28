@@ -8,6 +8,18 @@ export class MemoRepository implements MemoRepositoryInterface {
     return `${this.ENDPOINT}${path}`;
   }
 
+  getCookieArray() {
+    const arr: { [key: string]: string } = {};
+    if (document.cookie != '') {
+      const tmp = document.cookie.split('; ');
+      for (let i = 0; i < tmp.length; i++) {
+        const data = tmp[i].split('=');
+        arr[data[0]] = decodeURIComponent(data[1]);
+      }
+    }
+    return arr;
+  }
+
   private initializeMemo(memo: Params): Memo {
     const date = new Date();
     return {
@@ -25,10 +37,14 @@ export class MemoRepository implements MemoRepositoryInterface {
    * @returns Promise<Memo[]>
    */
   async getAll(): Promise<Memo[]> {
+    // const cookie = this.getCookieArray();
     const response = await fetch(this.makeUrl('/memos'), {
+      method: 'GET',
       headers: {
         'Content-type': 'application/json',
+        // 'X-XSRF-TOKEN': cookie['XSRF-TOKEN'],
       },
+      credentials: 'include',
     });
 
     if (response.ok) {
@@ -46,10 +62,13 @@ export class MemoRepository implements MemoRepositoryInterface {
    * @returns Memo
    */
   async get(id: number): Promise<Memo> {
+    const cookie = this.getCookieArray();
     const response = await fetch(this.makeUrl(`/memos/${id}`), {
       headers: {
         'Content-type': 'application/json',
+        'X-XSRF-TOKEN': cookie['XSRF-TOKEN'],
       },
+      credentials: 'include',
     });
 
     if (response.ok) {
@@ -73,6 +92,7 @@ export class MemoRepository implements MemoRepositoryInterface {
       headers: {
         'Content-type': 'application/json',
       },
+      credentials: 'include',
       body: JSON.stringify(memo),
     });
 
@@ -91,18 +111,19 @@ export class MemoRepository implements MemoRepositoryInterface {
    * @returns 更新後Memo
    */
   async update(id: number, memo: Params): Promise<Memo> {
-    const updatedMemo = await this.get(id);
-    updatedMemo.id = id;
+    const updatedMemo = this.initializeMemo(memo);
     updatedMemo.title = memo.title;
     updatedMemo.body = memo.body;
     updatedMemo.status = memo.status;
-    updatedMemo.updatedAt = new Date();
 
+    const cookie = this.getCookieArray();
     const response = await fetch(this.makeUrl(`/memos/${id}`), {
       method: 'PATCH',
       headers: {
         'Content-type': 'application/json',
+        'X-XSRF-TOKEN': cookie['XSRF-TOKEN'],
       },
+      credentials: 'include',
       body: JSON.stringify(updatedMemo),
     });
 
@@ -120,11 +141,14 @@ export class MemoRepository implements MemoRepositoryInterface {
    * @returns void
    */
   async delete(id: number): Promise<void> {
+    const cookie = this.getCookieArray();
     const response = await fetch(this.makeUrl(`/memos/${id}`), {
       method: 'DELETE',
       headers: {
         'Content-type': 'application/json',
+        'X-XSRF-TOKEN': cookie['XSRF-TOKEN'],
       },
+      credentials: 'include',
     });
 
     if (response.ok) {

@@ -11,4 +11,5 @@ export interface UserState {
 export interface UserStore {
   me: () => Promise<User>;
   login: (name: string, password: string) => Promise<boolean>;
+  logout: () => Promise<boolean>;
 }

@@ -21,7 +21,6 @@ export class UserRepository implements UserRepositoryInterface {
   }
 
   /**
-   * me
    * @returns User
    */
   async login(email: string, password: string): Promise<boolean> {
@@ -55,11 +54,9 @@ export class UserRepository implements UserRepositoryInterface {
   }
 
   /**
-   * me
    * @returns User
    */
   async me(): Promise<User> {
-    const cookie = this.getCookieArray();
     const response = await fetch(this.makeUrl('/api/me'), {
       method: 'GET',
       headers: {
@@ -74,6 +71,28 @@ export class UserRepository implements UserRepositoryInterface {
     } else {
       const err = response.json();
       throw new Error(`APi error: ${err}`);
+    }
+  }
+
+  /**
+   *
+   * @returns bool
+   */
+  async logout(): Promise<boolean> {
+    const cookie = this.getCookieArray();
+    const response = await fetch(this.makeUrl('/logout'), {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'X-XSRF-TOKEN': cookie['XSRF-TOKEN'],
+      },
+      credentials: 'include',
+    });
+
+    if (response.ok) {
+      return Promise.resolve(true);
+    } else {
+      return Promise.resolve(false);
     }
   }
 }

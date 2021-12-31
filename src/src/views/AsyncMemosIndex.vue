@@ -9,12 +9,13 @@
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
 import { memoKey } from '@/store/memo/memo';
+import { MemoStore } from '@/store/memo/type';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
   emits: ['onLoadComplete'],
   async setup(_, context) {
-    const memoStore = inject(memoKey);
+    const memoStore = inject<MemoStore>(memoKey);
     if (!memoStore) {
       throw new Error('memo store is not provided');
     }

@@ -10,6 +10,14 @@ const state = reactive<UserState>({
   },
 });
 
+const initializeState = () => {
+  state.me = {
+    id: 0,
+    name: '',
+    email: '',
+  };
+};
+
 const me = async (): Promise<User> => {
   const user = await Repository.user().me();
   state.me = user;
@@ -20,9 +28,17 @@ const login = async (email: string, password: string): Promise<boolean> => {
   return await Repository.user().login(email, password);
 };
 
+const logout = async (): Promise<boolean> => {
+  const ok = await Repository.user().logout();
+  initializeState();
+
+  return ok;
+};
+
 const userStore: UserStore = {
   me,
   login,
+  logout,
 };
 
 export default userStore;

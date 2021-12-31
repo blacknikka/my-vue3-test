@@ -4,7 +4,8 @@
     <div>{{ user.id }}</div>
     <div>{{ user.email }}</div>
 
-    <button @click="onGoBackClick">go back</button>
+    <button @click="onMemoClick">memos</button>
+    <button @click="onLogoutClick">logout</button>
   </body>
 </template>
 
@@ -37,14 +38,29 @@ export default defineComponent({
 
     const router = useRouter();
 
-    // go back
-    const onGoBackClick = () => {
-      router.back();
+    // logout
+    const onLogoutClick = async () => {
+      const ok: boolean = await userStore.logout();
+      if (ok) {
+        router.replace({
+          name: 'Login',
+        });
+      } else {
+        console.log('logout failed');
+      }
+    };
+
+    // memo
+    const onMemoClick = () => {
+      router.push({
+        name: 'Memos',
+      });
     };
 
     return {
       user,
-      onGoBackClick,
+      onLogoutClick,
+      onMemoClick,
     };
   },
 });
